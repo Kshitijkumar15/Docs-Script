@@ -14,15 +14,14 @@ function countRedWordsInElement(element) {
 
     for (var i = 0; i < words.length; i++) {
       var word = words[i];
-      var foregroundColor = element.getForegroundColor();
+      var wordColor = element.getForegroundColor(); // Get color for the whole word
 
       // Check if the word is red
-      if (foregroundColor && foregroundColor == '#ff0000') {
+      if (wordColor && wordColor == '#ff0000') {
         redWordCount++;
       }
     }
-  } else {
-    // Recursively count red words in child elements
+  } else if (element.getNumChildren) { // Check if the element has children
     var numChildren = element.getNumChildren();
     for (var j = 0; j < numChildren; j++) {
       redWordCount += countRedWordsInElement(element.getChild(j));
